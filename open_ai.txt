@@ -1,0 +1,21 @@
+def openai_text(prompt):
+    import openai
+
+    # Set the API key
+    openai.api_key = "Provide key here"
+
+    # Create a chat completion
+    response = openai.ChatCompletion.create(
+        model="gpt-4-turbo",  # Assuming "gpt-4-turbo" is the correct model
+        messages=[{"role": "user", "content": prompt}],
+        temperature=1,
+        max_tokens=256,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+    )
+
+    # Print the content of the response
+    data = response.get('choices')[0].get('message').get('content')
+    code = f'<!-- wp:heading --><h2 class="wp-block-heading">{data}</h2><!-- /wp:heading -->'
+    return code
